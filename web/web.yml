@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: yulbamn/web:v1
+        image: acrarc.azurecr.io/web:v1
         ports:
         - containerPort: 80
 ---     
