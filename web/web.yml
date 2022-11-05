@@ -3,6 +3,15 @@ kind: Namespace
 metadata:
   name: web
 ---
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJhenVyZWFyY2Fjci5henVyZWNyLmlvIjp7InVzZXJuYW1lIjoiQXp1cmVBcmNBQ1IiLCJwYXNzd29yZCI6IkRWdWw5WkpYL2t1ZWdGd2tCS2o1T0Q0UGJaaksxdk5RIiwiYXV0aCI6IlFYcDFjbVZCY21OQlExSTZSRloxYkRsYVNsZ3ZhM1ZsWjBaM2EwSkxhalZQUkRSUVlscHFTekYyVGxFPSJ9fX0=
+kind: Secret
+metadata:
+  name: acr-web
+  namespace: web
+type: kubernetes.io/dockerconfigjson
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,7 +20,7 @@ metadata:
   labels:
     app: web
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: web
@@ -22,9 +31,11 @@ spec:
     spec:
       containers:
       - name: web
-        image: azurearcacr.azurecr.io/web:v2
+        image: azurearcacr.azurecr.io/web:v1
         ports:
         - containerPort: 80
+      imagePullSecrets:
+        - name: acr-web
 ---     
 apiVersion: v1
 kind: Service
