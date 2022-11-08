@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: wordpress
+---
+apiVersion: v1
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJhenVyZWFyY2Fjci5henVyZWNyLmlvIjp7InVzZXJuYW1lIjoiQXp1cmVBcmNBQ1IiLCJwYXNzd29yZCI6IkRWdWw5WkpYL2t1ZWdGd2tCS2o1T0Q0UGJaaksxdk5RIiwiYXV0aCI6IlFYcDFjbVZCY21OQlExSTZSRloxYkRsYVNsZ3ZhM1ZsWjBaM2EwSkxhalZQUkRSUVlscHFTekYyVGxFPSJ9fX0= 
+kind: Secret
+metadata:
+  name: acr-wp
+  namespace: wordpress
+type: kubernetes.io/dockerconfigjson
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wordpress-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: wordpress-app
+  template:
+    metadata:
+      labels:
+        app: wordpress-app
+    spec:
+      containers:
+      - name: wordpress-app
+        image: azurearcacr.azurecr.io/wordpress-zen:v1.0
+        ports:
+        - containerPort: 80
+        env:
+        - name: DATABASE_HOST
+          value: "wordpress-db-zen.mysql.database.azure.com"
+        - name: DATABASE_USERNAME
+          value: "zen@wordpress-db-zen"
+        - name: DATABASE_PASSWORD
+          value: "Pass1234"
+        - name: DATABASE_NAME
+          value: "wordpressdb"
+      imagePullSecrets:
+        - name: acr-wp
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-svc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+  selector:
+    app: wordpress-app
