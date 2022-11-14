@@ -5,7 +5,8 @@ metadata:
 ---
 apiVersion: v1
 data:
-  .dockerconfigjson: 
+  .dockerconfigjson: eyJhdXRocyI6eyJhenVyZWFyY2Fjci5henVyZWNyLmlvIjp7InVzZXJuYW1lIjoiQXp1cmVBcmNBQ1IiLCJwYXNzd29yZCI6IkRWdWw5WkpYL2t1ZWdGd2tCS2o1T0Q0UGJaaksxdk5RIiwiYXV0aCI6IlFYcDFjbVZCY21OQlExSTZSRloxYkRsYVNsZ3ZhM1ZsWjBaM2EwSkxhalZQUkRSUVlscHFTekYyVGxFPSJ9fX0=
+  
 kind: Secret
 metadata:
   name: acr-web
