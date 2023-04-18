@@ -1,5 +1,5 @@
 # $Packer 이미지를 저장하기 위한 리소스그룹 생성
-$RG = "test-01"
+$RG = "TEST-02"
 $location = "koreacentral"
 
 # Create Azure ResourceGroup
