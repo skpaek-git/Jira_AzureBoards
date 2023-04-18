@@ -2,6 +2,7 @@
 $RG = "TEST-01"
 # 실패하게끔 아래 파라미터를 주석처리함
 # $location = "koreacentral"
+$locaion = "한국 중부"
 
 # Create Azure ResourceGroup
 New-AzResourceGroup -Name $RG -Location $location -Force -ErrorAction:SilentlyContinue
