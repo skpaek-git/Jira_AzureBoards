@@ -2,5 +2,5 @@
 $RG = "TEST-01"
 $location = "koreacentral"
 
-# Create Azure ResourceGroup
+### Create Azure ResourceGroup
 New-AzResourceGroup -Name $RG -Location $location -Force -ErrorAction:SilentlyContinue
